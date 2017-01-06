@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2014-2016 the original author or authors.
  *
@@ -13,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package example.springdata.rest.stores;
+package example.springdata.rest.stores.service;
 
-import static org.springframework.data.mongodb.core.index.GeoSpatialIndexType.*;
-
-import lombok.Value;
+import static org.springframework.data.mongodb.core.index.GeoSpatialIndexType.GEO_2DSPHERE;
 
 import java.util.UUID;
+
+import lombok.Value;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.geo.Point;
@@ -35,9 +36,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Store {
 
-	@Id UUID id = UUID.randomUUID();
-	String name;
-	Address address;
+	public @Id UUID id = UUID.randomUUID();
+	public String name;
+	public Address address;
+ 
+	public Store(String name, Address address) {
+		this.name = name;
+		this.address = address;
+	}
+	 
 
 	/**
 	 * Value object to represent an {@link Address}.
@@ -49,13 +56,22 @@ public class Store {
 
 		String street, city, zip;
 		@GeoSpatialIndexed(type = GEO_2DSPHERE) Point location;
-
+	 
+		public Address(String street, String city, String zip, Point location) {
+			this.street = street;
+			this.city = city;
+			this.zip = zip;
+			this.location = location;
+		}
+ 
 		/*
 		 * (non-Javadoc)
 		 * @see java.lang.Object#toString()
-		 */
+		 */ 
 		public String toString() {
 			return String.format("%s, %s %s", street, zip, city);
 		}
-	}
+
+ 
+	} 
 }
