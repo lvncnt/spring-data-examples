@@ -7,5 +7,5 @@ This repository contains example projects for the different Spring Data modules 
 We have separate folders for the samples of individual modules:
  
 ## Spring Data REST
-
+* `start` - Getting started with Spring 4 + RESTful service.
 * `starbucks` - A sample REST web-service built with Spring Data REST and MongoDB.
